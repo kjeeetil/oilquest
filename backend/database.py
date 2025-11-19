@@ -11,6 +11,9 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
 
+# Import models here to ensure they are registered with Base
+from models import *
+
 def get_db():
     db = SessionLocal()
     try:
