@@ -52,3 +52,6 @@ steps:
 images:
   - 'gcr.io/$PROJECT_ID/oilquest-backend'
   - 'gcr.io/$PROJECT_ID/oilquest-frontend'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
