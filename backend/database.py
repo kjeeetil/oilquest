@@ -3,8 +3,25 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import os
 
-# Default to localhost for local dev without docker, or use env var
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://user:password@localhost:5432/oilquest")
+import socket
+from dotenv import load_dotenv
+
+load_dotenv()
+
+def get_database_url():
+    url = os.getenv("DATABASE_URL")
+    if url:
+        return url
+    
+    # Try to resolve 'db' host to see if we are in docker-compose
+    try:
+        socket.gethostbyname("db")
+        return "postgresql://user:password@db:5432/oilquest"
+    except socket.error:
+        return "postgresql://user:password@localhost:5432/oilquest"
+
+DATABASE_URL = get_database_url()
+print(f"Using Database URL: {DATABASE_URL}")
 
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
