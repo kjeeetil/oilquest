@@ -6,7 +6,7 @@ import axios from 'axios';
 const API_URL = import.meta.env.PROD ? '' : 'http://localhost:8000';
 
 function App() {
-    const [count, setCount] = useState(0)
+    const [count] = useState(0)
     const [acreages, setAcreages] = useState([]);
     const [loading, setLoading] = useState(false);
 
