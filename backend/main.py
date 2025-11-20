@@ -5,8 +5,10 @@ from database import engine, Base, get_db
 import models
 import game_logic
 
-# Create tables
-Base.metadata.create_all(bind=engine)
+# Create tables on startup
+@app.on_event("startup")
+def startup_event():
+    Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="OilQuest API")
 
