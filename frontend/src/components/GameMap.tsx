@@ -1,6 +1,6 @@
 import { MapContainer, TileLayer, Rectangle, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 // Fix for Leaflet default icon issue
 import L from 'leaflet';
